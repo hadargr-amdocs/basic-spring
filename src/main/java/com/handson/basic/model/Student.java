@@ -10,6 +10,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 
 @Entity
@@ -29,6 +32,18 @@ public class Student implements Serializable {
     public LocalDateTime calcCreatedAt() {
         return LocalDateTime.ofInstant(createdAt, ZoneId.systemDefault());
     }
+
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Collection<StudentGrade> studentGrades = new ArrayList<>();
+
+    public Collection<StudentGrade> getStudentGrades() {
+        return studentGrades;
+    }
+
+    public void setStudentGrades(Collection<StudentGrade> studentGrades) {
+        this.studentGrades = studentGrades;
+    }
+
 
     @NotEmpty
     @Size(max = 60)
