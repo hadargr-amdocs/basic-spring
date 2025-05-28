@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.handson.basic.DTO.StudentDetailsOut;
 import com.handson.basic.DTO.StudentIn;
 import com.handson.basic.DTO.StudentOut;
+import com.handson.basic.error.StudentNotFoundException;
 import com.handson.basic.model.*;
 import com.handson.basic.service.AWSService;
 import com.handson.basic.service.SmsService;
@@ -109,7 +110,8 @@ public class StudentsController {
     public ResponseEntity<?> getOneStudent(@PathVariable Long id) {
         Optional<Student> optional = studentService.findById(id);
         if (optional.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
+            throw new StudentNotFoundException(id);
 
         Student student = optional.get();
 
