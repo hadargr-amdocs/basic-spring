@@ -26,6 +26,10 @@ public class StudentGrade implements Serializable {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    public StudentGrade(long l, String math, int i) {
+
+    }
+
     // Expose formatted version of createdAt
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdAt")
